@@ -47,8 +47,6 @@ define([
 
             $(this.$el).trigger('resized', [this.model]);
         }
-
-
     });
 
     return PictureView;

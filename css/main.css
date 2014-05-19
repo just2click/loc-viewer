@@ -123,6 +123,13 @@ body {
 }
 
 #search-buttons {
-    margin: 25px 5px -25px 5px;
+    margin: 300px 5px -335px -45px;
     display: none;
+    position: absolute;
+}
+
+#helptext {
+    margin-top: 200px;
+    text-align: center;
+    color: gray;
 }

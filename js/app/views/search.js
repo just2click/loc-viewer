@@ -13,10 +13,19 @@ define([
 
     var SearchView = Backbone.View.extend({
 
+        innerHTML: [
+
+        ].join(''),
+
         html: [
             '<br /><br />',
+            '<div id="loading">Loading...</div>',
+            '<div id="helptext">',
+                '<div class="well well-lg">',
+                    '<h3>Type text in the search box to look up images from the Library of Congress</h3>',
+                '</div>',
+            '</div>',
             '<div id="pictures-list" class="clearfix">',
-                '<div id="loading">Loading...</div>',
             '</div>',
         ].join(''),
 
@@ -32,18 +41,20 @@ define([
         initialize: function() {
             this.$el.html(this.html);
             this.$picturesList = this.$('#pictures-list');
-            this.$picturesButtons = this.$('#pictures-buttons');
             this.$loading = this.$('#loading');
+            this.$helptext = this.$('#helptext');
+
             this.$loading.hide();
 
             this.collection = new PicturesCollection([]);
             this.listenTo(this.collection, 'change', this.render);
-            this.listenTo(this.collection, 'destroy', this.applyMasonry);
+            this.listenTo(this.collection, 'destroy', this.removePicture);
+
+            this.hasNoImages();
         },
 
         render: function() {
             var that = this;
-            this.$imagesloaded = null;
 
             if (this.collection.length) {
 
@@ -59,6 +70,8 @@ define([
                     }
                 });
             }
+
+            this.hasNoImages();
             return this;
         },
 
@@ -66,6 +79,7 @@ define([
             var that = this;
 
             this.$loading.show();
+            this.$helptext.hide();
 
             this.collection.url = [
                 'http://loc.gov/pictures/search/?q=',
@@ -77,6 +91,7 @@ define([
                 success: function (collection, response, options) {
                     that.cleanUp();
                     that.render();
+                    that.$loading.hide();
                     setTimeout(that.applyMasonry, 2000);
                 },
                 error: function (collection, response, options) {
@@ -92,15 +107,28 @@ define([
             }
             this.views.length = 0;
             this.$picturesList.html('');
+            this.applyMasonry();
+            this.hasNoImages();
+        },
+
+        removePicture: function (e) {
+            if (e) {
+                _.findWhere(this.views, { 'id': 'picture-' + this.fixPk(e.attributes.pk) }).remove();
+            }
+
+            this.applyMasonry();
+            this.hasNoImages();
+        },
+
+        hasNoImages: function () {
+            if (this.views.length === 0) {
+                this.$helptext.show();
+            } else {
+                this.$helptext.hide();
+            }
         },
 
         applyMasonry: function (e) {
-            var that = this;
-
-            // if (e) {
-            //     _.findWhere(this.views, { 'id': 'picture-' + that.fixPk(e.attributes.pk) }).remove();
-            // }
-
             var $container = document.querySelector('#pictures-list');
 
             ImagesLoaded($container, function () {

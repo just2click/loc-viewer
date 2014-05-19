@@ -35,6 +35,11 @@ define([
                                 '<li>Change the display into an image gallery style</li>',
                             '</ul>',
                         '</p>',
+                        '<br />',
+                        '<p>',
+                            'Project source code is found at: ',
+                            '<a href="https://github.com/just2click/loc-viewer">LoC Viewer on github</a>',
+                        '</p>',
                     '</div>',
                 '</div>'
             ].join('');

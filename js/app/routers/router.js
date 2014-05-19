@@ -7,10 +7,9 @@ define([
 
     var Router = Backbone.Router.extend({
         routes: {
-            '': 'goToSearch', // Index route
-            'search': 'goToSearch',
+            '': 'hasSearchTerm', // Index route
+            'search': 'hasSearchTerm',
             'search/:search': 'hasSearchTerm',
-            //'dash/:place': 'goToDash',
             'about': 'goToAbout'
         },
 
@@ -32,6 +31,8 @@ define([
                     this.appView.setPage('search');
                     this.appView.runSearch(queryString);
                 }
+            } else {
+                this.goToSearch();
             }
         },
 

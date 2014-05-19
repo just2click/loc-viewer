@@ -28,16 +28,16 @@ define([
                         '<li id="nav-about"><a href="#about">About</a></li>',
                     '</ul>',
                 '</div>',
-                '<div id="search-buttons" class="clearfix">',
-                    '<button id="btn-clear" type="button" class="btn btn-default">Clear</button>',
-                '</div>',
                 '<div class="container fill">',
-                    '<div id="content"></div>',
+                    '<div id="content" class="col-md-8 pull-left"></div>',
+                    '<div id="search-buttons" class="col-md-1 pull-right">',
+                        '<button id="btn-clear" type="button" class="btn btn-default">Clear</button>',
+                    '</div>',
                 '</div>',
                 '<div id="footer" class="navbar navbar-default navbar-fixed-bottom">',
                     '<div class="container">',
                         '<p class="muted credit">',
-                            'by Dror Avidov',
+                            'by <a href="mailto:dror@tikalk.com">Dror Avidov</a>',
                         '</p>',
                     '</div>',
                 '</div>',
@@ -83,9 +83,15 @@ define([
             this.$('#page-' + page).show();
             this.$('#nav-' + page).addClass('active');
             this.$searchButtons.hide();
+
             if (page === 'search') {
                 this.$searchTerm.focus();
+                this.$searchButtons.hide();
+            } else if (page === 'about') {
+                this.views['search'].cleanUp();
             }
+
+            this.views['search'].hasNoImages();
         },
 
         runSearch: function (srchTerm) {
@@ -114,6 +120,7 @@ define([
 
         clearImages: function () {
             this.views['search'].cleanUp();
+            this.$searchButtons.hide();
             this.$searchTerm.val('');
             this.$searchTerm.focus();
         }
