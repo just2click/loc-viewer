@@ -78,9 +78,6 @@ define([
         runSearch: function(query, step, order, page) {
             var that = this;
 
-            this.$loading.show();
-            this.$helptext.hide();
-
             this.collection.url = [
                 'http://loc.gov/pictures/search/?q=',
                 escape(query),
@@ -90,9 +87,11 @@ define([
             this.collection.fetch({
                 success: function (collection, response, options) {
                     that.cleanUp();
+                    that.$picturesList.hide();
                     that.render();
-                    that.$loading.hide();
+                    that.showLoading();
                     setTimeout(that.applyMasonry, 2000);
+                    that.showImages();
                 },
                 error: function (collection, response, options) {
                     console.log('Error' + response);
@@ -101,7 +100,6 @@ define([
         },
 
         cleanUp: function() {
-            console.log('Clean Up');
             for (var i = 0; i<this.views.length; i++) {
                 this.views[i].remove();
             }
@@ -130,6 +128,7 @@ define([
 
         applyMasonry: function (e) {
             var $container = document.querySelector('#pictures-list');
+            var that = this;
 
             ImagesLoaded($container, function () {
                 var msnry = new Masonry( $container, {
@@ -143,6 +142,16 @@ define([
                 // manually trigger initial layout
                 msnry.layout();
             });
+        },
+
+        showLoading: function () {
+            this.$loading.show();
+            this.$helptext.hide();
+        },
+
+        showImages: function () {
+            this.$loading.hide();
+            this.$picturesList.show();
         },
 
         fixPk: function (pk) {

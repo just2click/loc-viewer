@@ -12,17 +12,22 @@
             </form>
         </div>
         <ul class="nav navbar-nav pull-right">
+            <li id="nav-settings"><a href="#settings">Settings</a></li>
             <li id="nav-about"><a href="#about">About</a></li>
         </ul>
     </div>
-    <div class="container fill">
-        <div id="content" class="col-md-8 pull-left"></div>
-        <div id="search-buttons" class="col-md-1 pull-right">
+    <nav class="navbar navbar-default navbar-lower" role="navigation" id="search-utils">
+      <div class="inner">
+        <div class="collapse navbar-collapse collapse-buttons">
             <button id="btn-clear" type="button" class="btn btn-default">Clear</button>
         </div>
+      </div>
+    </nav>
+    <div class="container fill">
+        <div id="content" class="col-md-8 pull-left"></div>
     </div>
     <div id="footer" class="navbar navbar-default navbar-fixed-bottom">
-        <div class="container">
+        <div class="footer-container">
             <p class="muted credit">
                 by <a href="mailto:dror@tikalk.com">Dror Avidov</a>
             </p>

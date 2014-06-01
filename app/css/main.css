@@ -8,7 +8,7 @@ html, body {
 
 /* Native Tags */
 body {
-    padding: 20px;
+    padding: 20px 0;
 }
 
 /* App View */
@@ -30,6 +30,13 @@ body {
     padding-bottom: 60px;
 }
 
+.inner {
+  margin: 20px 0 0px 0;
+  background-color: #e1e1e1;
+  border-bottom: 1px solid #aaa;
+  border-top: 1px solid #bbb;
+}
+
 .jumbotron {
     margin-top: 30px;
     background-color:#fff;
@@ -40,21 +47,6 @@ body {
 
 .custom {
     width: 22px !important;
-}
-
-.btn-circle {
-    width: 22px;
-    height: 22px;
-    text-align: center;
-    padding: 6px 0;
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 0.32;
-    border-radius: 11px;
-    vertical-align: text-bottom;
-    margin: 0 2px;
-    float: right;
-    background-color:#fff;
 }
 
 #content {
@@ -132,4 +124,8 @@ body {
     margin-top: 200px;
     text-align: center;
     color: gray;
+}
+
+.footer-container {
+  margin: 20px 0 0 30px;
 }

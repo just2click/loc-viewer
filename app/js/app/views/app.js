@@ -39,7 +39,7 @@ define([
             this.$('#content').append(this.views['about'].render().el);
             this.$('#content').append(this.views['search'].render().el);
             this.$searchTerm = this.$('#srch-term');
-            this.$searchButtons = this.$('#search-buttons');
+            this.$searchButtons = this.$('#search-utils');
         },
 
         render: function () {
