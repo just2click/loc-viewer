@@ -24,18 +24,18 @@ define([
         template: _.template(tmpl),
 
         themes: {
-            "default": "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css",
-            "amelia" : "//bootswatch.com/amelia/bootstrap.min.css",
-            "cerulean" : "//bootswatch.com/cerulean/bootstrap.min.css",
-            "cosmo" : "//bootswatch.com/cosmo/bootstrap.min.css",
-            "cyborg" : "//bootswatch.com/cyborg/bootstrap.min.css",
-            "flatly" : "//bootswatch.com/flatly/bootstrap.min.css",
-            "journal" : "//bootswatch.com/journal/bootstrap.min.css",
-            "readable" : "//bootswatch.com/readable/bootstrap.min.css",
-            "simplex" : "//bootswatch.com/simplex/bootstrap.min.css",
-            "slate" : "//bootswatch.com/slate/bootstrap.min.css",
-            "spacelab" : "//bootswatch.com/spacelab/bootstrap.min.css",
-            "united" : "//bootswatch.com/united/bootstrap.min.css"
+            "default": "css/bootstrap.min.css",
+            "amelia" : "css/themes/amelia/bootstrap.min.css",
+            "cerulean" : "css/themes/cerulean/bootstrap.min.css",
+            "cosmo" : "css/themes/cosmo/bootstrap.min.css",
+            "cyborg" : "css/themes/cyborg/bootstrap.min.css",
+            "flatly" : "css/themes/flatly/bootstrap.min.css",
+            "journal" : "css/themes/journal/bootstrap.min.css",
+            "readable" : "css/themes/readable/bootstrap.min.css",
+            "simplex" : "css/themes/simplex/bootstrap.min.css",
+            "slate" : "css/themes/slate/bootstrap.min.css",
+            "spacelab" : "css/themes/spacelab/bootstrap.min.css",
+            "united" : "css/themes/united/bootstrap.min.css"
         },
 
         initialize: function () {
