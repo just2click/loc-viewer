@@ -37,12 +37,22 @@ body {
   border-top: 1px solid #bbb;
 }
 
-.jumbotron {
+.smaller-jumbotron {
     margin-top: 30px;
-    background-color:#fff;
+    background-color: #fff !important;
     -webkit-box-shadow: 0 8px 6px -6px black;
     -moz-box-shadow: 0 8px 6px -6px black;
     box-shadow: 0 8px 6px -6px black;
+    font-size: 1.2 important;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px; /* future proofing */
+    -khtml-border-radius: 10px; /* for old Konqueror browsers */
+    padding: 0.6em 0.5em;
+}
+
+.smaller-jumbotron p {
+    font-size: 1.2 !important;
 }
 
 .custom {
@@ -127,5 +137,5 @@ body {
 }
 
 .footer-container {
-  margin: 20px 0 0 30px;
+  margin: 20px 30px 0 30px;
 }
