@@ -22,8 +22,8 @@ define([
 
         saveSettings: function (e) {
             var data = {
-                welcomeMessage: this.$('#welcomeMessageInput').val(),
-                backgroundColor: this.$('#backgroundColorInput').val()
+                selectedTheme: this.$('#selectedTheme').val(),
+                searchForValue: this.$('#searchForValueInput').val()
             };
 
             this.model.save(data);

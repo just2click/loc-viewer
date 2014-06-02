@@ -5,7 +5,6 @@ require.config({
         'text': 'libs/text',
         'jquery': 'libs/jquery-1.11.0.min',
         'mousewheel': 'libs/fancybox/lib/jquery.mousewheel-3.0.6.pack',
-        'fancybox': 'libs/fancybox/source/jquery.fancybox.pack',
         'underscore': 'libs/underscore',
         'backbone': 'libs/backbone',
         'bootstrap': 'libs/bootstrap',

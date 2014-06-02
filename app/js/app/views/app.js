@@ -4,8 +4,9 @@ define([
     'backbone',
     'app/views/search',
     'app/views/about',
+    'app/views/settings',
     'text!templates/main.html',
-], function ($, _, Backbone, SearchView, AboutView, tmpl) {
+], function ($, _, Backbone, SearchView, AboutView, SettingsView, tmpl) {
     'use strict';
 
     var AppView = Backbone.View.extend({
@@ -21,6 +22,21 @@ define([
         views: {},
 
         template: _.template(tmpl),
+
+        themes: {
+            "default": "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css",
+            "amelia" : "//bootswatch.com/amelia/bootstrap.min.css",
+            "cerulean" : "//bootswatch.com/cerulean/bootstrap.min.css",
+            "cosmo" : "//bootswatch.com/cosmo/bootstrap.min.css",
+            "cyborg" : "//bootswatch.com/cyborg/bootstrap.min.css",
+            "flatly" : "//bootswatch.com/flatly/bootstrap.min.css",
+            "journal" : "//bootswatch.com/journal/bootstrap.min.css",
+            "readable" : "//bootswatch.com/readable/bootstrap.min.css",
+            "simplex" : "//bootswatch.com/simplex/bootstrap.min.css",
+            "slate" : "//bootswatch.com/slate/bootstrap.min.css",
+            "spacelab" : "//bootswatch.com/spacelab/bootstrap.min.css",
+            "united" : "//bootswatch.com/united/bootstrap.min.css"
+        },
 
         initialize: function () {
             this.listenTo(this.model, 'change', this.render);
@@ -40,9 +56,14 @@ define([
             this.$('#content').append(this.views['search'].render().el);
             this.$searchTerm = this.$('#srch-term');
             this.$searchButtons = this.$('#search-utils');
+            this.$themesheet = $('<link href="' + this.themes['default'] + '" rel="stylesheet" />');
+
+            this.$themesheet.appendTo('head');
         },
 
         render: function () {
+            var themeUrl = this.themes[this.model.get('selectedTheme')];
+            this.$themesheet.attr('href', themeUrl);
             return this;
         },
 
@@ -92,6 +113,15 @@ define([
             this.$searchButtons.hide();
             this.$searchTerm.val('');
             this.$searchTerm.focus();
+        },
+
+        openSettings: function (e) {
+            var modal = new SettingsView ({
+                'title': 'Application Settings',
+                'id': 'modal-settings',
+                model: this.model
+            });
+            modal.show();
         }
     });
 
