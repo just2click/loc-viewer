@@ -3,13 +3,13 @@ define([
     'underscore',
     'backbone',
     'app/views/modal',
-    'app/templates'
-], function ($, _, Backbone, ModalView, Templates) {
+    'text!templates/settings.html',
+], function ($, _, Backbone, ModalView, tmpl) {
     'use strict';
 
     var SettingsView = ModalView.extend( {
 
-        template: Templates["settings"],
+        template: _.template(tmpl),
 
         events: {
             'click #btn-save': 'saveSettings'
@@ -22,8 +22,7 @@ define([
 
         saveSettings: function (e) {
             var data = {
-                selectedTheme: this.$('#selectedTheme').val(),
-                searchForValue: this.$('#searchForValueInput').val()
+                selectedTheme: this.$('#selectedTheme').val()
             };
 
             this.model.save(data);

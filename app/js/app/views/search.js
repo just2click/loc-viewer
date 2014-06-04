@@ -63,7 +63,8 @@ define([
                         element.fixedPk = that.fixPk(element.get('pk'));
                         var picture = new PictureView({
                             model: element,
-                            id: ['picture-',that.fixPk(element.get('pk'))].join('')
+                            id: ['picture-',that.fixPk(element.get('pk'))].join(''),
+                            parent: that
                         });
                         that.$picturesList.append(picture.render().el);
                         that.views.push(picture);
@@ -135,6 +136,9 @@ define([
                   // disables initial layout
                   columnWidth: 50,
                   isAnimated: true,
+                  isResizeable: true,
+                  animationOptions: {queue: true,duration: 500},
+                  isFitWidth: true,
                   itemSelector: '.item',
                   gutter: 10,
                   isOriginLeft: false
@@ -152,6 +156,28 @@ define([
         showImages: function () {
             this.$loading.hide();
             this.$picturesList.show();
+        },
+
+        getPrevPk: function(currentPk) {
+            var index = this.collection.models.map(function (item) { return item.fixedPk; }).indexOf(currentPk);
+
+            index = index - 1;
+
+            if (index === -1) {
+                index = this.collection.models.length - 1;
+            }
+
+            return this.collection.models[index];
+        },
+
+        getNextPk: function (currentPk) {
+            var index = this.collection.models.map(function (item) { return item.fixedPk; }).indexOf(currentPk);
+
+            index = index + 1;
+
+            if (index === this.collection.models.length) { index = 0; }
+
+            return this.collection.models[index];
         },
 
         fixPk: function (pk) {

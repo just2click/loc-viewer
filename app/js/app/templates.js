@@ -26,7 +26,7 @@ define([
     ].join('');
 
     Templates['modal'] = [
-        '<div class="modal fade">',
+        '<div class="modal fade" id="modal-main">',
             '<div class="modal-dialog">',
                 '<div class="modal-content">',
                     '<div class="modal-header">',
@@ -39,42 +39,14 @@ define([
         '</div>'
     ].join('');
 
-    Templates['settings'] = [
-        '<form role="form">',
-            '<div class="form-group">',
-                '<label for="searchForValue">Number of images per search</label>',
-                '<input type="text" class="form-control" id="searchForValueInput" placeholder="Set number of images to search for" value="<%= searchForValue %>"/>',
-            '</div>',
-            '<div class="form-group">',
-                '<label for="bootstrapTheme">Select Bootstrap Theme</label>',
-                '<select id="selectedTheme" class="form-control">',
-                    '<option value="default" <% if (selectedTheme==\"default\") print(\"selected\") %>>Default</option>',
-                    '<option value="amelia" <% if (selectedTheme==\"amelia\") print(\"selected\") %>>Amelia</option>',
-                    '<option value="cerulean" <% if (selectedTheme==\"cerulean\") print(\"selected\") %>>Cerulean</option>',
-                    '<option value="cosmo" <% if (selectedTheme==\"cosmo\") print(\"selected\") %>>Cosmo</option>',
-                    '<option value="cyborg" <% if (selectedTheme==\"cyborg\") print(\"selected\") %>>Cyborg</option>',
-                    '<option value="flatly" <% if (selectedTheme==\"flatly\") print(\"selected\") %>>Flatly</option>',
-                    '<option value="journal" <% if (selectedTheme==\"journal\") print(\"selected\") %>>Journal</option>',
-                    '<option value="readable" <% if (selectedTheme==\"readable\") print(\"selected\") %>>Readable</option>',
-                    '<option value="simplex" <% if (selectedTheme==\"simplex\") print(\"selected\") %>>Simplex</option>',
-                    '<option value="slate" <% if (selectedTheme==\"slate\") print(\"selected\") %>>Slate</option>',
-                    '<option value="spacelab" <% if (selectedTheme==\"spacelab\") print(\"selected\") %>>Space Lab</option>',
-                    '<option value="united" <% if (selectedTheme==\"united\") print(\"selected\") %>>United</option>',
-                '</select>',
-            '</div>',
-            '<div id="btn-save" class="btn btn-default">Save</div>',
-        '</form>'
-    ].join('');
-
-    Templates['singleImage'] = [
+    Templates['largePicture'] = [
         '<div class="container-fluid galleryContainer">',
-            '<div class="row-fluid">',
-            '<div class="span8" id="selectedImageArea"></div>',
+            '<div id="prev" class="pull-left prev-arrow"><a href="#" id="goPrev"><span class="glyphicon glyphicon-chevron-left"></span></a></div>',
+            '<div id="selectedImageArea">',
+                '<img class="img fitImage" itemprop="image" src="<%= full %>" title="<%= title %>" />',
+            '</div>',
+            '<div id="next" class="pull-right next-arrow"><a href="#" id="goNext"><span class="glyphicon glyphicon-chevron-right"></span></a></div>',
         '</div>'
-    ].join('');
-
-    Templates['largerImage'] = [
-        '<img class="img" itemprop="image" src="<%= full %>" title="<%= title %>" />'
     ].join('');
 
     for (var tmpl in Templates) {

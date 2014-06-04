@@ -2,8 +2,9 @@ define([
     'jquery',
     'underscore',
     'backbone',
+    'app/views/largePicture',
     'app/templates'
-], function ($, _, Backbone, Templates) {
+], function ($, _, Backbone, LargePicture ,Templates) {
 
     'use strict';
 
@@ -16,7 +17,9 @@ define([
             'click #btn-toggle': 'togglePicture'
         },
 
-        initialize: function() {
+        initialize: function(options) {
+            this.parent = options.parent;
+
             var html = this.template(this.model.toJSON());
             this.$el.html(html);
             this.$bodyEl = this.$('.panel-body');
@@ -31,21 +34,36 @@ define([
         },
 
         togglePicture: function (e) {
-            if (this.$('#expand').hasClass('hide')) {
-                this.$('#collapse').addClass('hide');
-                this.$('#expand').removeClass('hide');
+            this.showTheLargePicture(this.model);
+        },
 
-                this.$('#picture-' + this.model.fixedPk + ' > img ').css('max-width', '200px');
-                this.$('#picture-' + this.model.fixedPk + ' > img ').css('max-height', '200px');
-            } else {
-                this.$('#expand').addClass('hide');
-                this.$('#collapse').removeClass('hide');
+        showTheLargePicture: function (picture, refreshOnly) {
+            this.$modal = new LargePicture ({
+                'title': picture.attributes.title,
+                'id': 'modal-large-picture-' + picture.fixedPk,
+                model: this.model,
+                parent: this
+            });
+            //if (!refreshOnly) {
+                this.$modal.show();
+            //}
+            this.$modal.render();
+        },
 
-                this.$('#picture-' + this.model.fixedPk + ' > img ').css('max-width', '100%');
-                this.$('#picture-' + this.model.fixedPk + ' > img ').css('max-height', '100%');
-            }
+        getPrevPk: function(currentPk) {
+            var model = this.parent.getPrevPk(currentPk);
 
-            $(this.$el).trigger('resized', [this.model]);
+            this.$modal.options.title = model.attributes.title;
+            this.$modal.options.id = 'modal-large-picture-' + model.fixedPk;
+            return model;
+        },
+
+        getNextPk: function (currentPk) {
+            var model =  this.parent.getNextPk(currentPk);
+
+            this.$modal.options.title = model.attributes.title;
+            this.$modal.options.id = 'modal-large-picture-' + model.fixedPk;
+            return model;
         }
     });
 
