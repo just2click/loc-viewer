@@ -31,8 +31,10 @@ define([
         },
 
         resetPicture: function () {
+            var data = this.model.toJSON();
             this.$bodyEl.empty();
-            this.$bodyEl.html(this.template(this.model.toJSON()));
+            this.$bodyEl.html(this.template(data));
+            this.$titleEl.html(data.title);
         },
 
         goPrev: function () {
